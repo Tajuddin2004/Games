@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>HotGames</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    html {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
     body {
       background: linear-gradient(135deg, #ff9966, #ff5e62, #ffb347);
       font-family: 'Roboto', Arial, sans-serif;
@@ -67,13 +75,13 @@
       overflow: hidden;
       position: relative;
       white-space: nowrap;
+      width: 100%;
+      /* extra for mobile overflow scroll */
     }
-
     .games-slider-track {
       display: inline-flex;
       gap: 20px;
       align-items: flex-start;
-      /* the trick: width = 2x all cards (they are duplicated!) */
       animation: marquee-slider 20s linear infinite;
     }
     @keyframes marquee-slider {
@@ -88,6 +96,7 @@
       left: 0; width: 40px;
       background: linear-gradient(to right, #fff 65%, #ffffff00);
       z-index: 2;
+      display: block;
     }
     .slider-fade.slider-fade-right {
       left: auto; right: 0;
@@ -207,20 +216,33 @@
       background: linear-gradient(90deg,#ffbb62 30%, #fd5b63 100%);
       color:#f3f1f1;
     }
+    /* Responsive Styles */
+    @media (max-width: 1100px) {
+      .slider-section, .games-section {max-width: 98vw;}
+    }
     @media (max-width: 900px) {
       .games-list {justify-content: center;}
-      .games-section {padding: 1.2em 4vw;}
-      .slider-section {padding: 1em 4vw;}
+      .games-section {padding: 1.2em 2vw;}
+      .slider-section {padding: 1em 2vw;}
       .games-slider-track .game-card.slider {min-width: 120px; width: 120px;}
     }
     @media (max-width: 600px) {
       .banner {font-size: 1.3em;}
       .main-content {margin-top: 85px;}
       .games-section {padding:1em 1vw;}
-      .game-card {width: 98vw; max-width: 350px;}
+      .games-title {font-size:1.15em;}
+      .game-card {width: 95vw; max-width: 320px;}
       .games-list {gap: 18px 0;}
       .slider-section {padding: .7em 0.3em;}
-      .games-slider-track .game-card.slider {min-width: 95px; width: 95px;}
+      .games-slider-track .game-card.slider {min-width: 100px; width: 100px; font-size:0.79em;}
+      .game-name {width:100px;}
+      .slider-title {font-size: 1em;}
+      .games-slider-marquee {padding-bottom:10px;}
+      .slider-fade,.slider-fade.slider-fade-right{width:14vw;min-width:22px;}
+    }
+    @media (max-width: 400px) {
+      .game-card {max-width:207px; width:96vw;}
+      .games-slider-track .game-card.slider {min-width:80px; width:80px;}
     }
   </style>
 </head>
@@ -231,13 +253,12 @@
     <!-- Sliding Games Section (Seamless Marquee) -->
     <div class="slider-section">
       <div class="slider-title">🔥 Top Picks</div>
-      <div class="games-slider-marquee" style="position:relative;">
+      <div class="games-slider-marquee">
         <div class="slider-fade"></div>
         <div class="slider-fade slider-fade-right"></div>
         <div class="games-slider-track">
           <!-- CARD SET START -->
-          
-            <a href="https://tajuddin2004.github.io/Game-Valo/" class="game-link">
+          <a href="https://tajuddin2004.github.io/Game-Valo/" class="game-link">
             <div class="game-card slider">
               <span class="game-rating">4.5 ★</span>
               <img class="game-logo" src="fortnite.jpg" alt="Fortnite Logo">
@@ -288,7 +309,6 @@
             <div class="game-type">Sports</div>
           </div>
           <!-- CARD SET END -->
-
           <!-- DUPLICATE CARD SET FOR LOOP -->
           <a href="https://tajuddin2004.github.io/Game-Valo/" class="game-link">
             <div class="game-card slider">
